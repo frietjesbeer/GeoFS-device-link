@@ -16,7 +16,7 @@ If your phone has a gyro (almost every smartphone has one), the website will aut
 
 
 How to install?
-- Install geofslink.js in the console, or via tampermonkey.
+- Paste geofslink.js in the console, or install it in tampermonkey.
 - Open the website https://frietjesbeer.github.io/GeoFS-device-link/ on the device you want your PFD / AP panel on.
 - When opening GeoFs a small plane shaped icon will appear in the bottom bar, click that and you will see a dashboard.
 - On the website, go to the autopilot panel and click on the settings icon at the top right of your screen.
