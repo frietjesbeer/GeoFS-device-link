@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl"><head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0d1015">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
@@ -36,13 +36,13 @@ main{flex:1;position:relative;min-height:0}
 body.pfdfs header{display:none}
 body.pfdfs #pfd{position:fixed;inset:0;z-index:900;background:#000;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 body.pfdfs{padding:0}
-/* telefoon liggend: op het instrumentenscherm de kop verbergen zodat de PFD het scherm vult */
+/* phone in landscape: hide the header on the instruments screen so the PFD fills the screen */
 @media (max-height:520px) and (orientation:landscape){
   body.t-pfd header{display:none}
   body.t-pfd #pback{display:inline-flex}
 }
 
-/* autopilot: ontworpen voor een staande telefoon, één kolom */
+/* autopilot: designed for a portrait phone, single column */
 #ap{overflow:auto;-webkit-overflow-scrolling:touch}
 #apwrap{display:flex;flex-direction:column;gap:10px;padding:10px;max-width:560px;margin:0 auto}
 #aprow{display:flex;gap:8px}
@@ -79,12 +79,12 @@ body.pfdfs{padding:0}
 .soon{margin:8px 0;color:var(--mut);font-size:13px}
 body.stale #pfdsvg{filter:grayscale(.85) brightness(.65)}
 
-/* telefoon staand: alleen het autopilot-paneel */
+/* phone in portrait: only the autopilot panel */
 @media (orientation:portrait) and (max-width:700px){
   nav{display:none}#ptitle{display:block}#stxt{display:none}
 }
 
-/* dialoog */
+/* dialog */
 dialog{background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:12px;width:min(420px,92vw);max-height:92vh;overflow:auto}
 dialog::backdrop{background:rgba(0,0,0,.6)}
 dialog h3{margin:10px 0 6px;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);font-weight:600}
@@ -100,46 +100,46 @@ input{display:block;width:100%;margin-top:4px;padding:10px;font:15px ui-monospac
 <title>GeoFS Companion</title></head>
 <body>
 <header>
-  <nav><button data-tab="pfd" class="on">Instrumenten</button><button data-tab="ap">Autopilot</button></nav>
+  <nav><button data-tab="pfd" class="on">Instruments</button><button data-tab="ap">Autopilot</button></nav>
   <span id="ptitle">Autopilot</span>
-  <div id="status"><i id="dot"></i><span id="stxt">Niet gekoppeld</span>
-    <button id="gear" class="ic" aria-label="Instellingen"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9M13 4v6M7 14v6"/></svg></button></div>
+  <div id="status"><i id="dot"></i><span id="stxt">Not paired</span>
+    <button id="gear" class="ic" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9M13 4v6M7 14v6"/></svg></button></div>
 </header>
 <main>
   <section id="pfd" class="tab on">
     <svg id="pfdsvg" viewBox="0 0 820 400" preserveAspectRatio="xMidYMid meet"></svg>
     <div id="pbtns">
-      <button id="pback" class="ic" aria-label="Naar autopilot"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <button id="fsbtn" class="ic" aria-label="Volledig scherm"><svg class="i-in" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="i-out" viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
+      <button id="pback" class="ic" aria-label="Go to autopilot"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button id="fsbtn" class="ic" aria-label="Fullscreen"><svg class="i-in" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="i-out" viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
     </div>
   </section>
   <section id="ap" class="tab">
     <div id="apwrap">
-      <div id="aprow"><button id="aptog">AUTOPILOT: —</button><button id="pausebtn">PAUZE</button></div>
+      <div id="aprow"><button id="aptog">AUTOPILOT: —</button><button id="pausebtn">PAUSE</button></div>
       <div id="apmsg"></div>
       <div id="apgrid"></div>
-      <div class="fph"><h3>Flightplan</h3><span id="lnavtxt"></span><button id="lnavstop" hidden>Stop direct</button></div>
-      <p class="soon" id="fphint">Tik op een waypoint om de paarse markering op de PFD erheen te zetten (de autopilot doet dan niets). Met Direct vliegt de autopilot erheen.</p>
-      <div id="fplist"><p class="soon">Geen flightplan gevonden in GeoFS.</p></div>
+      <div class="fph"><h3>Flight plan</h3><span id="lnavtxt"></span><button id="lnavstop" hidden>Stop direct</button></div>
+      <p class="soon" id="fphint">Tap a waypoint to point the magenta marker on the PFD at it (the autopilot does nothing). Direct makes the autopilot fly there.</p>
+      <div id="fplist"><p class="soon">No flight plan found in GeoFS.</p></div>
     </div>
   </section>
 </main>
 <dialog id="pair"><form method="dialog">
-  <h3>Koppeling</h3>
-  <p>Scan de QR uit het userscript, of plak de gegevens hier. Plak je de hele link in één van de velden, dan vult hij beide in.</p>
+  <h3>Pairing</h3>
+  <p>Scan the QR from the userscript, or paste the details here. If you paste the whole link into one of the fields, both are filled in.</p>
   <label>Peer-ID<input id="ipeer" autocapitalize="off" autocorrect="off"></label>
   <label>Token<input id="itoken" autocapitalize="off" autocorrect="off"></label>
-  <p id="wlnote" hidden>Wake Lock niet beschikbaar: zet automatisch vergrendelen uit in je telefooninstellingen.</p>
-  <h3>Instrumenten</h3>
-  <label class="chk"><input type="checkbox" id="ipitch"> Pitch omkeren</label>
-  <label class="chk"><input type="checkbox" id="iroll"> Roll omkeren</label>
-  <div class="row2"><button type="button" id="pcal">Pitch kalibreren (nu level)</button><button type="button" id="pcalreset">Wis</button></div>
+  <p id="wlnote" hidden>Wake Lock not available: turn off auto-lock in your phone settings.</p>
+  <h3>Instruments</h3>
+  <label class="chk"><input type="checkbox" id="ipitch"> Invert pitch</label>
+  <label class="chk"><input type="checkbox" id="iroll"> Invert roll</label>
+  <div class="row2"><button type="button" id="pcal">Calibrate pitch (currently level)</button><button type="button" id="pcalreset">Reset</button></div>
   <p id="pcalv" class="hint"></p>
-  <div class="row"><button id="save" class="pri" value="ok">Koppel</button><button id="unpair" value="x">Ontkoppel</button><button value="c">Sluit</button></div>
+  <div class="row"><button id="save" class="pri" value="ok">Pair</button><button id="unpair" value="x">Unpair</button><button value="c">Close</button></div>
 </form></dialog>
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
-<script>// Transportlaag. Interface: connect(pairing), disconnect(), send(msg), onMessage(cb), onStatus(cb)
-// status: 'disconnected' | 'connecting' | 'connected'. Vervang deze klasse door WebSocket/TURN-variant met dezelfde vorm.
+<script>// Transport layer. Interface: connect(pairing), disconnect(), send(msg), onMessage(cb), onStatus(cb)
+// status: 'disconnected' | 'connecting' | 'connected'. Replace this class with a WebSocket/TURN variant of the same shape.
 class PeerTransport {
   constructor(opts) { this.opts = opts || {}; this.msgCb = () => {}; this.stCb = () => {}; this.attempt = 0; this.timer = null; this.stopped = true; this.ok = false; }
   onMessage(cb) { this.msgCb = cb; }
@@ -180,7 +180,7 @@ class PeerTransport {
   const distNm = (la1, lo1, la2, lo2) => { const p1 = la1 * D2R, p2 = la2 * D2R, a = Math.sin((p2 - p1) / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin((lo2 - lo1) * D2R / 2) ** 2; return 2 * 3440.065 * Math.asin(Math.min(1, Math.sqrt(a))); };
 
   // ---------- pairing ----------
-  // Accepteert een hele koppelings-link (…#peer=…&token=…) of losse waardes
+  // Accepts a whole pairing link (…#peer=…&token=…) or separate values
   function parsePair(str) {
     const p = /[#&?]peer=([^&\s]+)/.exec(str || ''), t = /[#&?]token=([^&\s]+)/.exec(str || '');
     return p && t ? { peer: decodeURIComponent(p[1]), token: decodeURIComponent(t[1]) } : null;
@@ -205,18 +205,18 @@ class PeerTransport {
 
   function paint() {
     const stale = isStale();
-    const [c, t] = !LS.peer ? ['', 'Niet gekoppeld'] : conn === 'connected' ? (stale ? ['warn', 'Data verouderd'] : ['ok', 'Verbonden']) : conn === 'connecting' ? ['warn', 'Verbinden…'] : ['bad', 'Verbroken'];
+    const [c, t] = !LS.peer ? ['', 'Not paired'] : conn === 'connected' ? (stale ? ['warn', 'Data stale'] : ['ok', 'Connected']) : conn === 'connecting' ? ['warn', 'Connecting…'] : ['bad', 'Disconnected'];
     $('#dot').className = c; $('#stxt').textContent = t;
     document.body.classList.toggle('stale', stale || (!!LS.peer && conn !== 'connected'));
   }
   setInterval(paint, 500);
 
   // ---------- instellingen ----------
-  // PFD-correcties bovenop SIGN in het userscript: omkeren en pitch-nulpunt
+  // PFD corrections on top of SIGN in the userscript: inversion and pitch zero point
   const sgn = () => ({ p: LS.invPitch === '1' ? -1 : 1, r: LS.invRoll === '1' ? -1 : 1 });
   const pOff = () => { const v = parseFloat(LS.pitchOff); return isFinite(v) ? v : 0; };
   const dlg = $('#pair');
-  const pcalTxt = () => { $('#pcalv').textContent = pOff() ? `Pitch-nulpunt verschoven met ${pOff().toFixed(2)}°` : 'Geen pitch-correctie actief.'; };
+  const pcalTxt = () => { $('#pcalv').textContent = pOff() ? `Pitch zero point shifted by ${pOff().toFixed(2)}°` : 'No pitch correction active.'; };
   $('#gear').onclick = () => {
     $('#ipeer').value = LS.peer || ''; $('#itoken').value = LS.token || ''; $('#wlnote').hidden = 'wakeLock' in navigator;
     $('#ipitch').checked = LS.invPitch === '1'; $('#iroll').checked = LS.invRoll === '1';
@@ -224,10 +224,10 @@ class PeerTransport {
   };
   $('#ipitch').onchange = (e) => { LS.invPitch = e.target.checked ? '1' : '0'; LS.pitchOff = '0'; pcalTxt(); };
   $('#iroll').onchange = (e) => { LS.invRoll = e.target.checked ? '1' : '0'; };
-  // Kalibreren: de huidige (level) pitch wordt het nulpunt van de PFD
-  $('#pcal').onclick = () => { const s = latestState(); if (!s) { $('#pcalv').textContent = 'Nog geen data ontvangen.'; return; } LS.pitchOff = String(s.pitch * sgn().p); pcalTxt(); };
+  // Calibrate: the current (level) pitch becomes the PFD zero point
+  $('#pcal').onclick = () => { const s = latestState(); if (!s) { $('#pcalv').textContent = 'No data received yet.'; return; } LS.pitchOff = String(s.pitch * sgn().p); pcalTxt(); };
   $('#pcalreset').onclick = () => { LS.pitchOff = '0'; pcalTxt(); };
-  // Plakt iemand de hele link in één veld, dan worden beide velden ingevuld
+  // If the whole link is pasted into one field, both fields are filled in
   const onPaste = (e) => { const r = parsePair(e.target.value); if (r) { $('#ipeer').value = r.peer; $('#itoken').value = r.token; } };
   $('#ipeer').addEventListener('input', onPaste); $('#itoken').addEventListener('input', onPaste);
   $('#save').onclick = () => { LS.peer = $('#ipeer').value.trim(); LS.token = $('#itoken').value.trim(); go(); };
@@ -244,7 +244,7 @@ class PeerTransport {
   }
   document.querySelectorAll('nav button').forEach((b) => b.onclick = () => { lastTab = b.dataset.tab; setTab(b.dataset.tab); });
   $('#pback').onclick = () => { lastTab = 'ap'; setTab('ap'); };
-  // Telefoon staand: alleen het autopilot-paneel; liggend komt het vorige tabblad terug
+  // Phone in portrait: only the autopilot panel; in landscape the previous tab comes back
   const portrait = matchMedia('(orientation: portrait) and (max-width: 700px)');
   function applyOrient() {
     if (portrait.matches) { if (tab !== 'ap') lastTab = tab; if (document.body.classList.contains('pfdfs')) setFs(false); setTab('ap'); }
@@ -263,7 +263,7 @@ class PeerTransport {
   }
   function pushState(m) {
     if (buf.length && m.ts <= buf[buf.length - 1].ts) return;
-    const o = Date.now() - m.ts; // klokverschil + latency; neem het minimum (traag bijgesteld) als offset
+    const o = Date.now() - m.ts; // clock difference + latency; use the minimum (slowly adjusted) as the offset
     off = off === null ? o : o < off ? o : off + (o - off) * 0.02;
     buf.push(m); if (buf.length > 40) buf.shift();
   }
@@ -276,7 +276,7 @@ class PeerTransport {
     }
     return Object.assign({}, buf[0]);
   }
-  // Extra rustige IAS voor weergave: exponentieel filter bovenop het filter in het userscript
+  // Extra-calm IAS for display: exponential filter on top of the one in the userscript
   let siV = null, siT = 0;
   function smoothIas(v, now) {
     if (siV === null || now - siT > 1500) siV = v; else siV += (v - siV) * (1 - Math.exp(-Math.min(0.2, (now - siT) / 1000) / 0.6));
@@ -285,7 +285,7 @@ class PeerTransport {
   function latestState() { return buf.length ? buf[buf.length - 1] : null; }
 
   // ---------- flightplan ----------
-  // selIdx = alleen gekozen (de PFD wijst ernaartoe, de autopilot doet niets); "Direct" laat de autopilot er echt heen vliegen.
+  // selIdx = only selected (the PFD points to it, the autopilot does nothing); "Direct" makes the autopilot actually fly there.
   let plan = [], actIdx = -1, actOn = false, selIdx = -1;
   function setPlan(w) {
     const prev = selIdx >= 0 && plan[selIdx] ? plan[selIdx].n : null;
@@ -302,7 +302,7 @@ class PeerTransport {
     paintSel();
   }
   function paintSel() { listEl.querySelectorAll('.fp').forEach((el, i) => el.classList.toggle('sel', i === selIdx)); }
-  // Markeert het actieve (direct-to) waypoint in de lijst, alleen bij verandering
+  // Marks the active (direct-to) waypoint in the list, only on change
   function syncActive() {
     const s = latestState(), ln = s && s.lnav, idx = ln && ln.on ? ln.idx : -1;
     if (idx === actIdx && !!(ln && ln.on) === actOn) return;
@@ -311,7 +311,7 @@ class PeerTransport {
   }
   setInterval(syncActive, 500);
 
-  // ---------- PFD (SVG, naar voorbeeld van de foto) ----------
+  // ---------- PFD (SVG, modelled on the reference photo) ----------
   // viewBox 820x400. Attitude-venster x200..540, y60..280 (midden CX,CY). Snelheidstape links, hoogtetape rechts, VSI helemaal rechts, kompasboog onderaan.
   const svg = $('#pfdsvg'), CX = 370, CY = 170, PPD = 3.8, SPPU = 2.4, APPU = 0.25, HALF = 130;
   const SX0 = 70, SX1 = 170, AX0 = 590, AX1 = 690, TY0 = 40, TY1 = 300, RY = 576, RR = 250;
@@ -402,7 +402,7 @@ class PeerTransport {
     }
     return s;
   }
-  // Rollende cijfers in de uitleesvakken: hogere waardes staan boven, zoals bij een tape
+  // Rolling digits in the readout boxes: higher values are on top, like on a tape
   function spdDrum(v) {
     const x = Math.max(0, v), tens = Math.floor(x / 10), f = x - tens * 10, n0 = Math.floor(f); let s = '';
     for (let n = n0 - 1; n <= n0 + 2; n++) s += `<text x="124" y="${CY + 11 - (n - f) * 30}">${((n % 10) + 10) % 10}</text>`;
@@ -427,17 +427,17 @@ class PeerTransport {
     el.hz.setAttribute('transform', tf); el.hzl.setAttribute('transform', tf); el.rp.setAttribute('transform', `rotate(${-roll})`);
     el.ra.textContent = s.hagl != null && s.hagl < 2500 && s.hagl > -50 ? Math.max(0, Math.round(s.hagl)) : '';
     drawFma(s, ap);
-    // snelheid
+    // speed
     el.st.innerHTML = spdTape(s.ias);
     const sd = spdDrum(s.ias); el.s10.textContent = sd[0]; el.sdr.innerHTML = sd[1];
     el.gs.textContent = Math.round(s.gs);
     el.mach.textContent = typeof s.mach === 'number' && s.mach > 0.1 ? 'M ' + s.mach.toFixed(2).replace(/^0/, '') : '';
     el.sb.innerHTML = ap.spd != null ? `<path d="M${SX1} ${clampY(CY - (ap.spd - s.ias) * SPPU)}l-14 -9v18z" fill="none" stroke="${MAG}" stroke-width="3" opacity="${dim}"/>` : '';
-    // hoogte
+    // altitude
     el.at.innerHTML = altTape(s.alt);
     const ad = altDrum(s.alt); el.a100.textContent = ad[0] > 0 ? ad[0] : ''; el.adr.innerHTML = ad[1];
     el.ab.innerHTML = ap.alt != null ? `<path d="M${AX0} ${clampY(CY - (ap.alt - s.alt) * APPU)}l14 -9v18z" fill="none" stroke="${MAG}" stroke-width="3" opacity="${dim}"/>` : '';
-    // verticale snelheid
+    // vertical speed
     el.vn.setAttribute('d', `M750 ${CY}L716 ${CY + vsY(s.vs)}`);
     el.vb.innerHTML = ap.on && ap.vs != null ? `<line x1="738" x2="752" y1="${CY + vsY(ap.vs)}" y2="${CY + vsY(ap.vs)}" stroke="${MAG}" stroke-width="3.5"/>` : '';
     // kompasboog
@@ -450,7 +450,7 @@ class PeerTransport {
     el.hd.innerHTML = r;
     const nv = s.nav, ln = s.lnav, rot = (d) => `rotate(${Math.max(-44, Math.min(44, w180(d)))} ${CX} ${RY})`; let b = '';
     if (ap.hdg != null) b += `<path transform="${rot(ap.hdg - h)}" d="M${CX - 10} ${RY - RR + 2}V${RY - RR - 12}H${CX + 10}V${RY - RR + 2}" fill="none" stroke="${MAG}" stroke-width="3" opacity="${dim}"/>`;
-    // Richting naar het geselecteerde waypoint, of de ILS-baan als er een localizer is
+    // Direction to the selected waypoint, or the ILS course if there is a localizer
     let tgt = null;
     if (selIdx >= 0 && plan[selIdx]) tgt = brgTo(s.lat, s.lon, plan[selIdx].lat, plan[selIdx].lon);
     else if (ln && ln.on && ln.brg != null) tgt = ln.brg;
@@ -458,15 +458,15 @@ class PeerTransport {
     else if (nv && nv.brg != null) tgt = nv.brg;
     if (tgt != null) b += `<path transform="${rot(tgt - h)}" d="${dia(CX, RY - RR + 18, 7, 10)}" fill="${MAG}"/>`;
     el.hb.innerHTML = b;
-    // ILS-afwijkingen: 1 punt = 1,25° (localizer) resp. 0,35° (glijpad); diamant omhoog = je zit onder het pad
+    // ILS deviations: 1 dot = 1.25° (localizer) resp. 0.35° (glidepath); diamond up = you are below the path
     const hasLoc = !!(nv && nv.loc != null), hasGs = !!(nv && nv.gs != null);
-    el.lcsc.setAttribute('display', 'inline'); el.glsc.setAttribute('display', 'inline'); // schalen altijd zichtbaar, zoals op de foto
+    el.lcsc.setAttribute('display', 'inline'); el.glsc.setAttribute('display', 'inline'); // scales always visible, as in the photo
     el.lcd.setAttribute('d', !hasLoc ? '' : dia(CX + Math.max(-2.1, Math.min(2.1, nv.loc / 1.25)) * 34, 297, 10, 6));
     el.gsd.setAttribute('d', !hasGs ? '' : dia(565, CY + Math.max(-2.1, Math.min(2.1, nv.gs / 0.35)) * 30, 6, 10));
   }
   drawPFD({ ias: 0, gs: 0, alt: 0, hdg: 0, pitch: 0, roll: 0, vs: 0, ap: {} }, 0);
 
-  // ---------- PFD volledig scherm (met pseudo-fullscreen voor iPhone Safari) ----------
+  // ---------- PFD fullscreen (with pseudo-fullscreen for iPhone Safari) ----------
   const fsb = $('#fsbtn'), isNativeFs = () => document.fullscreenElement || document.webkitFullscreenElement;
   function setFs(on) {
     document.body.classList.toggle('pfdfs', on);
@@ -480,24 +480,24 @@ class PeerTransport {
         if (isNativeFs()) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
         if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
       }
-    } catch (e) { /* de CSS-variant (pseudo-fullscreen) blijft werken */ }
+    } catch (e) { /* the CSS variant (pseudo-fullscreen) keeps working */ }
   }
   fsb.onclick = () => setFs(!document.body.classList.contains('pfdfs'));
   const onFsChange = () => { if (!isNativeFs() && document.body.classList.contains('pfdfs')) setFs(false); };
   document.addEventListener('fullscreenchange', onFsChange); document.addEventListener('webkitfullscreenchange', onFsChange);
 
-  // ---------- autopilot-tab (staand) ----------
+  // ---------- autopilot tab (portrait) ----------
   const APC = [
     { k: 'hdg', name: 'HEADING', short: 'heading', unit: '°', cmd: 'set_hdg', steps: [-10, -1, 1, 10], min: 0, max: 359, wrap: true, fmt: (v) => String(Math.round(v) % 360).padStart(3, '0') },
-    { k: 'alt', name: 'HOOGTE', short: 'hoogte', unit: 'ft', cmd: 'set_alt', steps: [-1000, -100, 100, 1000], min: 0, max: 60000, fmt: (v) => Math.round(v) },
-    { k: 'spd', name: 'SNELHEID (IAS)', short: 'snelheid', unit: 'kt', cmd: 'set_spd', steps: [-10, -1, 1, 10], min: 60, max: 700, fmt: (v) => Math.round(v) },
-    { k: 'vs', name: 'VERTICALE SNELHEID', short: 'VS', unit: 'fpm', cmd: 'set_vs', steps: [-500, -100, 100, 500], min: -6000, max: 6000, fmt: (v) => (v > 0 ? '+' : '') + Math.round(v) },
+    { k: 'alt', name: 'ALTITUDE', short: 'altitude', unit: 'ft', cmd: 'set_alt', steps: [-1000, -100, 100, 1000], min: 0, max: 60000, fmt: (v) => Math.round(v) },
+    { k: 'spd', name: 'SPEED (IAS)', short: 'speed', unit: 'kt', cmd: 'set_spd', steps: [-10, -1, 1, 10], min: 60, max: 700, fmt: (v) => Math.round(v) },
+    { k: 'vs', name: 'VERTICAL SPEED', short: 'VS', unit: 'fpm', cmd: 'set_vs', steps: [-500, -100, 100, 500], min: -6000, max: 6000, fmt: (v) => (v > 0 ? '+' : '') + Math.round(v) },
   ];
   const sgnTxt = (d) => (d > 0 ? '+' : '−') + Math.abs(d);
   const apGrid = $('#apgrid'), dirty = {};
   apGrid.innerHTML = APC.map((c) => `<div class="apc"><div class="aph"><span class="apl">${c.name}</span><span class="apv"><b id="v-${c.k}">—</b><small>${c.unit}</small></span></div>
 <div class="apr">${c.steps.slice(0, 2).map((d) => `<button data-k="${c.k}" data-d="${d}">${sgnTxt(d)}</button>`).join('')}<input id="i-${c.k}" data-k="${c.k}" type="number" inputmode="numeric" step="1">${c.steps.slice(2).map((d) => `<button data-k="${c.k}" data-d="${d}">${sgnTxt(d)}</button>`).join('')}</div>
-<button class="set" data-k="${c.k}" data-set="1">Zet ${c.short}</button></div>`).join('');
+<button class="set" data-k="${c.k}" data-set="1">Set ${c.short}</button></div>`).join('');
   const apOf = (c) => (latestState() && latestState().ap && latestState().ap[c.k]);
   const norm = (c, v) => (c.wrap ? ((Math.round(v) % 360) + 360) % 360 : Math.min(c.max, Math.max(c.min, Math.round(v))));
 
@@ -507,22 +507,22 @@ class PeerTransport {
     clearTimeout(msgT); msgT = setTimeout(() => { el.textContent = ''; el.className = ''; }, 7000);
   }
   function sendCmd(name, value, label, k) {
-    if (!canSend()) { say('Niet verbonden: commando niet verstuurd', 'bad'); return; }
+    if (!canSend()) { say('Not connected: command not sent', 'bad'); return; }
     const id = ++cid; pend.set(id, { name, label, k, t: performance.now() });
     tr.send({ t: 'cmd', id, name, value }); say(label + '…', '');
   }
   function onAck(m) {
     const p = pend.get(m.id); if (!p) return; pend.delete(m.id);
     if (m.ok) { say('✔ ' + p.label + (m.applied != null && typeof m.applied !== 'boolean' && p.name !== 'nav_direct' ? ' → ' + m.applied : ''), 'ok'); if (p.k) dirty[p.k] = false; }
-    else say('✖ ' + p.label + ': ' + (m.err || 'fout'), 'bad');
+    else say('✖ ' + p.label + ': ' + (m.err || 'error'), 'bad');
   }
-  setInterval(() => { const n = performance.now(); pend.forEach((p, id) => { if (n - p.t > CFG.ackMs) { pend.delete(id); say(p.label + ': geen antwoord van de sim', 'bad'); } }); }, 500);
+  setInterval(() => { const n = performance.now(); pend.forEach((p, id) => { if (n - p.t > CFG.ackMs) { pend.delete(id); say(p.label + ': no response from the sim', 'bad'); } }); }, 500);
 
   apGrid.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     const c = APC.find((x) => x.k === b.dataset.k), inp = $('#i-' + c.k);
     if (b.dataset.set) {
-      const v = parseFloat(inp.value); if (!isFinite(v)) { say('Vul eerst een getal in', 'bad'); return; }
+      const v = parseFloat(inp.value); if (!isFinite(v)) { say('Enter a number first', 'bad'); return; }
       const val = norm(c, v); inp.value = val; sendCmd(c.cmd, val, c.short + ' ' + val, c.k);
     } else {
       let base = parseFloat(inp.value); if (!isFinite(base)) base = Number(apOf(c)) || 0;
@@ -530,33 +530,33 @@ class PeerTransport {
     }
   });
   apGrid.addEventListener('input', (e) => { if (e.target.dataset.k) dirty[e.target.dataset.k] = true; });
-  $('#aptog').onclick = () => { const s = latestState(), on = !!(s && s.ap && s.ap.on); sendCmd('ap_toggle', !on, 'autopilot ' + (on ? 'uit' : 'aan')); };
-  $('#pausebtn').onclick = () => { const s = latestState(), p = !!(s && s.paused); sendCmd('sim_pause', !p, p ? 'sim hervatten' : 'sim pauzeren'); };
+  $('#aptog').onclick = () => { const s = latestState(), on = !!(s && s.ap && s.ap.on); sendCmd('ap_toggle', !on, 'autopilot ' + (on ? 'off' : 'on')); };
+  $('#pausebtn').onclick = () => { const s = latestState(), p = !!(s && s.paused); sendCmd('sim_pause', !p, p ? 'resuming sim' : 'pausing sim'); };
   listEl.addEventListener('click', (e) => {
     const row = e.target.closest('.fp'); if (!row || !plan[+row.dataset.i]) return;
     const i = +row.dataset.i;
-    if (e.target.closest('button')) { selIdx = i; paintSel(); sendCmd('nav_direct', i, 'direct naar ' + plan[i].n); }
-    else { selIdx = selIdx === i ? -1 : i; paintSel(); } // tik op de rij: kiezen / weer deselecteren
+    if (e.target.closest('button')) { selIdx = i; paintSel(); sendCmd('nav_direct', i, 'direct to ' + plan[i].n); }
+    else { selIdx = selIdx === i ? -1 : i; paintSel(); } // tap the row: select / deselect again
   });
-  $('#lnavstop').onclick = () => sendCmd('nav_cancel', true, 'direct stoppen');
+  $('#lnavstop').onclick = () => sendCmd('nav_cancel', true, 'stopping direct');
 
   function updateAp(s) {
     const a = (s && s.ap) || {}, ok = !!s && canSend();
     $('#ap').classList.toggle('dis', !ok);
     $('#ap').querySelectorAll('button,input').forEach((el) => { el.disabled = !ok; });
-    const t = $('#aptog'); t.textContent = 'AUTOPILOT: ' + (a.on === true ? 'AAN' : a.on === false ? 'UIT' : '—'); t.className = a.on === true ? 'on' : 'off';
-    const pb = $('#pausebtn'), pz = !!(s && s.paused); pb.textContent = pz ? 'HERVAT' : 'PAUZE'; pb.className = pz ? 'paused' : '';
-    // Toon altijd wat de sim echt heeft; het invoerveld volgt de sim zolang je niets aan het instellen bent
+    const t = $('#aptog'); t.textContent = 'AUTOPILOT: ' + (a.on === true ? 'ON' : a.on === false ? 'OFF' : '—'); t.className = a.on === true ? 'on' : 'off';
+    const pb = $('#pausebtn'), pz = !!(s && s.paused); pb.textContent = pz ? 'RESUME' : 'PAUSE'; pb.className = pz ? 'paused' : '';
+    // Always show what the sim really has; the input field follows the sim as long as you are not editing
     for (const c of APC) {
       const v = a[c.k], inp = $('#i-' + c.k);
       $('#v-' + c.k).textContent = v == null ? '—' : c.fmt(v);
       if (!dirty[c.k] && document.activeElement !== inp && v != null) inp.value = Math.round(v);
     }
-    // flightplan: afstand/koers naar elk punt, status van direct-to
+    // flight plan: distance/bearing to each point, direct-to status
     const ln = (s && s.lnav) || {}, lt = $('#lnavtxt'), stop = $('#lnavstop');
     stop.hidden = !ln.on;
-    if (ln.on) lt.textContent = `Direct → ${ln.n || '?'} · ${ln.brg != null ? p3(ln.brg) + '°' : ''} · ${ln.dist != null ? ln.dist + ' NM' : ''}` + (a.on === false ? ' · AP staat uit!' : '');
-    else lt.textContent = ln.done ? 'Laatste waypoint bereikt' : '';
+    if (ln.on) lt.textContent = `Direct → ${ln.n || '?'} · ${ln.brg != null ? p3(ln.brg) + '°' : ''} · ${ln.dist != null ? ln.dist + ' NM' : ''}` + (a.on === false ? ' · AP is off!' : '');
+    else lt.textContent = ln.done ? 'Last waypoint reached' : '';
     if (s) listEl.querySelectorAll('.fp').forEach((el, i) => {
       const p = plan[i]; if (!p) return;
       el.querySelector('.mid').textContent = `${p.alt != null ? Math.round(p.alt) + ' ft · ' : ''}${p3(brgTo(s.lat, s.lon, p.lat, p.lon))}° · ${distNm(s.lat, s.lon, p.lat, p.lon).toFixed(1)} NM`;
@@ -578,7 +578,7 @@ class PeerTransport {
   async function lock() { try { if ('wakeLock' in navigator && document.visibilityState === 'visible' && (!wl || wl.released)) wl = await navigator.wakeLock.request('screen'); } catch (e) { /* geweigerd */ } }
   document.addEventListener('visibilitychange', lock); document.addEventListener('click', lock); lock();
 
-  // (geen service worker in de single-file versie)
+  // (no service worker in the single-file version)
   readHash(); go(); applyOrient();
   if (!LS.peer) $('#gear').click();
 })();
